@@ -1,0 +1,58 @@
+{%extends 'base.html'%} {% block body %}
+<center style="color: white; font-size: 48px; font-weight: bold; height: 100px">
+  Daily Task
+</center>
+<div class="card">
+  {% if tasks|length < 1 %}
+  <h3 style="text-align: center">There are no tasks. Add a new one below!</h3>
+  {% else %}
+  <table>
+    <tr>
+      <th>Task</th>
+      <th>Added</th>
+      <th>Action</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+      <td>{{task.content}}</td>
+      <td>{{ task.data_created.date() }}</td>
+      <td>
+        <a href="/update/{{task.id}}" class="action">Update</a>
+        <a href="/delete/{{task.id}}" class="action">Delete</a><br />
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  <form name="add_task" id="add_task" action="/" method="POST">
+    <input
+      type="text"
+      name="content"
+      id="content"
+      class="field"
+      placeholder="Enter task name..."
+    />
+    <div class="button_container">
+      <a href="#" onclick="submitForm(event)" class="button">
+        <div class="button__line"></div>
+        <div class="button__line"></div>
+        <span class="button__text">Add task</span>
+        <div class="button__drow1"></div>
+        <div class="button__drow2"></div>
+      </a>
+    </div>
+  </form>
+
+  <script>
+    function submitForm() {
+      var inputField = document.getElementById("content");
+      if (inputField.value === "") {
+        alert("Please enter a value for the input field.");
+      } else {
+        document.getElementById("add_task").submit();
+      }
+    }
+  </script>
+</div>
+{% endblock %}

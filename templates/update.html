@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+
+{% block body %}
+<div class="card">
+    <h1 style="text-align: center;">
+        Update Task
+    </h1>
+    
+    <!-- <form action="/update/{{task.id}}"method="POST">
+        <input type="text" name="content" id="content" value="{{task.content}}">
+        <input type="submit" value="Update">
+    </form> --> 
+
+    <form id="update_task" action="/update/{{task.id}}" method="POST">
+        <input type="text" name="content" id="content" class="field" style="margin-top: 0px;" value="{{task.content}}" placeholder="Enter task name..."/>
+        <div class="button_container">
+          <a href="#" onclick="submitForm(event)" class="button">
+            <div class="button__line"></div>
+            <div class="button__line"></div>
+            <span class="button__text">Update task</span>
+            <div class="button__drow1"></div>
+            <div class="button__drow2"></div>
+          </a>
+        </div>
+      </form>
+
+      <script>
+        function submitForm() {
+        var inputField = document.getElementById("content");
+          if (inputField.value === "") {
+            alert("Please enter a value for the input field.");
+          } else {
+            document.getElementById("update_task").submit();
+          }
+          }
+      </script>
+</div>
+{% endblock %}
